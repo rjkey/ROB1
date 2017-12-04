@@ -44,7 +44,7 @@ cv2.imshow('gray', gray)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-circles = cv2.HoughCircles(gray, cv.CV_HOUGH_GRADIENT, 1, 80, param1=120,param2=10, minRadius=18, maxRadius=25)
+circles = cv2.HoughCircles(gray, cv.CV_HOUGH_GRADIENT, 1, 80, param1=120, minRadius=18, maxRadius=25)
 
 if circles is not None:
 
