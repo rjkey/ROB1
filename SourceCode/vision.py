@@ -3,7 +3,6 @@ import cv2
 import urllib
 import numpy as np
 import math
-import time
 
 def get_from_webcam():
     """
@@ -114,39 +113,37 @@ def show_bricks(image,bricks,color):
     for b in bricks:
         cv2.drawContours(image,[b],0,color,2)
 
-#image = get_from_file('test.jpg')
-
-image = get_from_webcam()
+image = get_from_file('test.jpg')
+#image = get_from_webcam()
 cv2.imshow('raw',image)
 
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-#hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+lower_blue = np.array([100,50,50])
+upper_blue = np.array([130,255,255])
 
-#lower_blue = np.array([100,50,50])
-#upper_blue = np.array([130,255,255])
+lower_green = np.array([35,50,50])
+upper_green = np.array([90,255,255])
 
-#lower_green = np.array([35,50,50])
-#upper_green = np.array([90,255,255])
+lower_yellow = np.array([20,50,50])
+upper_yellow = np.array([30,255,255])
 
-#lower_yellow = np.array([20,50,50])
-#upper_yellow = np.array([30,255,255])
-
-#lower_red = np.array([0,50,50])
-#upper_red = np.array([20,255,255])
+lower_red = np.array([0,50,50])
+upper_red = np.array([20,255,255])
 
 
-#blue_bricks = do_full(image,hsv,upper_blue,lower_blue,True)
-#green_bricks = do_full(image,hsv,upper_green,lower_green)
-#yellow_bricks = do_full(image,hsv,upper_yellow,lower_yellow)
-#red_bricks = do_full(image,hsv,upper_red,lower_red)
+blue_bricks = do_full(image,hsv,upper_blue,lower_blue,True)
+green_bricks = do_full(image,hsv,upper_green,lower_green)
+yellow_bricks = do_full(image,hsv,upper_yellow,lower_yellow)
+red_bricks = do_full(image,hsv,upper_red,lower_red)
 
-#show_bricks(image,blue_bricks,(255,0,0))
-#show_bricks(image,green_bricks,(0,255,0))
-#show_bricks(image,yellow_bricks,(0,255,255))
-#show_bricks(image,red_bricks,(0,0,255))
+show_bricks(image,blue_bricks,(255,0,0))
+show_bricks(image,green_bricks,(0,255,0))
+show_bricks(image,yellow_bricks,(0,255,255))
+show_bricks(image,red_bricks,(0,0,255))
 
-#cv2.imshow('result',image)
-#cv2.imwrite('result.jpg',image)
-#key = cv2.waitKey(0)
-#if key == 27:
- #   exit(0)
+cv2.imshow('result',image)
+cv2.imwrite('result.jpg',image)
+key = cv2.waitKey(0)
+if key == 27:
+    exit(0)
